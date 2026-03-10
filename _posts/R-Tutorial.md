@@ -5,10 +5,11 @@
 R is a powerful open‑source language (https://www.R-project.org/) for statistical computing and graphics, created in the early 1990s by Ross Ihaka and Robert Gentleman at the University of Auckland (the name was a play on the proprietary statistical software popular at the time called S, later S-plus). Initially with a statistical focus, it has become one of the best data-science languages.  While a huge number of people have made, and continue to make, contributions to R, a notable push to the standardisation of the language was given by Hadley Wickham and colleagues at RStudio (now Posit, https://posit.co/), who created a standardised ecosystem of packages know as the "tidyverse", as well as providing data publishing tools RShiny and more recently Quarto.  While there is some controversy about how the tidyverse has come to dominate R, at the risk of neglecting other key contributors and frameworks, it is undeniable that the tidyverse offers rapid data prototyping and data display using a flexible, regular and easy to learn syntax. 
 
 *Citation: R Core Team (2021). R: A language and environment for statistical  computing. R Foundation for Statistical Computing, Vienna, Austria.
+**Origin story: https://www.stat.auckland.ac.nz/~ihaka/downloads/Otago.pdf
 
 ### Preface
 
-There are a huge number of resources for learning R (e.g., see https://r4ds.hadley.nz/, https://rc2e.com/) and so the ambition of this tutorial is small.  As a user of R and other languages over the years, I have been impressed with the capability of R and am delighted to share the learnings I have had with the language.  This documentation seeks to develop a lightweight resource that provides the key knowledge for learning R as I understand it as an experienced data scientist who has used R along with other languages (SQL, R, Python, SAS etc.). It assumes some coding familiarity, or a desire to become familiar, as the goal is to have a condensed understanding of the different data structures available within R and the key properties and methods for each. This document was begun as a self-resource, but I have expanded it and standardised it.
+There are a huge number of resources for learning R (e.g., see https://r4ds.hadley.nz/, https://rc2e.com/, https://r02pro.github.io/) and so the ambition of this tutorial is small.  As a user of R and other languages over the years, I have been impressed with the capability of R and am delighted to share the learnings I have had with the language.  This documentation seeks to develop a lightweight resource that provides the key knowledge for learning R as I understand it as an experienced data scientist who has used R along with other languages (SQL, R, Python, SAS etc.). It assumes some coding familiarity, or a desire to become familiar, as the goal is to have a condensed understanding of the different data structures available within R and the key properties and methods for each. This document was begun as a self-resource, but I have expanded it and standardised it.
 
 #### Confession
 
@@ -96,13 +97,20 @@ x > 3 & x < 10
 
 **3. Vectors: R’s Most Fundamental Data Structure**
 
-A **vector** is a sequence of elements of the *same* data type.
+A **vector** is a sequence of elements of the *same* data type. Note that indexing starts at 1 in R (not 0 like in many other languages).
+
 
 ### **Creating vectors**
+The combine/concatenate function c(...) is used to create vectors. 
+
 ```r
 v <- c(1, 2, 3, 4)
 names <- c("Alice", "Bob")
 flags <- c(TRUE, FALSE, TRUE)
+> a = c(1,2)
+> b = c(3,4)
+> c(a, b)
+[1] 1 2 3 4
 ```
 
 ### **Type coercion**
@@ -113,7 +121,23 @@ c(1, "a")       # becomes character
 c(TRUE, 2)      # becomes numeric
 ```
 
----
+### Naming
+Vectors can be named, and then accessed via names. In other operations they behave identically as non-named vectors.
+
+```r
+> a <- c(ID = 1234, age=24)
+> a["ID"]
+[1] 1234
+> a[1]
+[1] 1234
+a[1] + 1
+> 1235
+> names(a)
+[1] c("ID", "age")
+```
+
+Vectors can have elements reassigned although this will create a copy of the data
+--
 
 ## **4. Subsetting Vectors**
 
@@ -121,19 +145,17 @@ R gives you several powerful ways to extract elements.
 
 ### **By position**
 ```r
+v
 v[1]       # first element
 v[2:4]     # positions 2 through 4
 v[c(1,3)]  # positions 1 and 3
+v[-1]      # all except the first element
+v[-c(1,3) # all except positions 1 and 3
 ```
 
 ### **By logical vector**
 ```r
 v[v > 2]   # all elements greater than 2
-```
-
-### **By negative index (exclude)**
-```r
-v[-1]      # all except the first element
 ```
 
 ### **By name**
@@ -146,12 +168,8 @@ ages["Bob"]
 ---
 
 
-## **4. Sequence and Range Operators**
 
-These are numeric but used for generating sequences.
----
-
-## 🧮 **5. Mathematical Functions (base R)**
+## **5. Mathematical Functions (base R)**
 
 These aren’t operators but are essential for numeric work.
 
@@ -175,6 +193,10 @@ These aren’t operators but are essential for numeric work.
 
 
 
+## **4. Sequence and Range Operators**
+
+These are numeric but used for generating sequences.
+---
 ### **Colon operator**
 ```r
 1:5      # 1 2 3 4 5
