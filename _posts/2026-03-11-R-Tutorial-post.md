@@ -1,3 +1,8 @@
+---
+layout: post
+title: "My Second Post"
+---
+
 # R Tutorial
 
 ## Introduction
