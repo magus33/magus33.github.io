@@ -121,23 +121,6 @@ c(1, "a")       # becomes character
 c(TRUE, 2)      # becomes numeric
 ```
 
-### Naming
-Vectors can be named, and then accessed via names. In other operations they behave identically as non-named vectors.
-
-```r
-> a <- c(ID = 1234, age=24)
-> a["ID"]
-[1] 1234
-> a[1]
-[1] 1234
-a[1] + 1
-> 1235
-> names(a)
-[1] c("ID", "age")
-```
-
-Vectors can have elements reassigned although this will create a copy of the data
---
 
 ## **4. Subsetting Vectors**
 
@@ -150,7 +133,7 @@ v[1]       # first element
 v[2:4]     # positions 2 through 4
 v[c(1,3)]  # positions 1 and 3
 v[-1]      # all except the first element
-v[-c(1,3) # all except positions 1 and 3
+v[-c(1,3)] # all except positions 1 and 3
 ```
 
 ### **By logical vector**
@@ -159,13 +142,49 @@ v[v > 2]   # all elements greater than 2
 ```
 
 ### **By name**
-If your vector has names:
+Vectors can be named, and then accessed via names. This assigns an attribute "names". In other operations they behave identically as non-named vectors.
+
+Assignment
 ```r
-ages <- c(Alice = 25, Bob = 30)
-ages["Bob"]
+# Direct
+> a <- c(ID = 1234, age=24)
+> a 
+[1] ID    age
+    1234  24
+
+# Two step: using names()
+> a <- c(1234, 24)
+> names(a) = c("ID", "age")
+> a
+[1] ID    age
+    1234  24
 ```
 
----
+Indexing
+```r
+> a["ID"]
+[1] 1234
+
+> a[1]
+[1] 1234
+
+> a[1] + 1
+[1] 1235
+
+> names(a)
+[1] "ID"  "age"
+```
+
+Vectors can have elements reassigned. This will have memory implications for large vectors as it creates a copy.
+
+```r
+> a = c(1,2,3)
+> a[1] = 5
+> a
+[1] c(5,2,3)
+```
+
+--
 
 
 
