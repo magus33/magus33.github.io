@@ -1,6 +1,7 @@
 ---
-layout: post
 title: "My Second Post"
+permalink: /tutorial/
+layout: default
 ---
 
 # R Tutorial
